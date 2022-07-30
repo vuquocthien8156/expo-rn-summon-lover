@@ -8,7 +8,7 @@ import {
   TitleFunction,
   TextButtonConfirm,
   LoadingContainer,
-} from "./stylesComponent";
+} from "../stylesComponent";
 
 import { pushToken } from "./service";
 import AsyncStorage from "@react-native-async-storage/async-storage";

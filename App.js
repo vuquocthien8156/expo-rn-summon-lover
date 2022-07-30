@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, LogBox, Alert } from "react-native";
-import { BoyScreen } from "./BoyScreen";
-import { GirlScreen } from "./GirlScreen";
+import { BoyScreen } from "./src/BoyScreen";
+import { GirlScreen } from "./src/GirlScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaProvider } from "react-native-safe-area-context";
