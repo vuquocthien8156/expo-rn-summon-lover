@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect } from 'react';
 import { LogBox, Text, Alert } from 'react-native';
 import { BoyScreen } from './src/BoyScreen';
@@ -7,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import messages from '@react-native-firebase/messaging';
 import SplashScreen from 'react-native-splash-screen';
-import CodePush from 'react-native-code-push';
+import codePush from 'react-native-code-push';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,22 +25,22 @@ const App = () => {
     messages()
       .getInitialNotification()
       .then((data) => {
-        data.notification && showAlertInForeground(data.notification);
+        data?.notification && showAlertInForeground(data.notification);
       });
 
     const sub = messages().onMessage((data) => {
-      if (data.notification) showAlertInForeground(data.notification);
+      if (data?.notification) showAlertInForeground(data.notification);
     });
 
     SplashScreen.hide();
 
-    CodePush.sync({
-      deploymentKey: 'C02N3nnXBMcnPPu1Db7st6PObgehKFo4puRHj',
-      updateDialog: true,
-      installMode: CodePush.InstallMode.IMMEDIATE,
-    }).catch((e) => {
-      alert(e.message);
-    });
+    if (!__DEV__) {
+      codePush.sync({
+        deploymentKey: 'C02N3nnXBMcnPPu1Db7st6PObgehKFo4puRHj',
+        updateDialog: true,
+        installMode: codePush.InstallMode.IMMEDIATE,
+      });
+    }
 
     return () => {
       sub();
@@ -55,6 +56,7 @@ const App = () => {
             tabBarActiveBackgroundColor: '#36b1e1',
             tabBarHideOnKeyboard: true,
             lazy: false,
+            headerPressOpacity: 0.3,
           }}>
           <Tab.Screen
             name="GirlScreen"
@@ -62,6 +64,7 @@ const App = () => {
             options={{
               tabBarIcon: () => <Text>👩</Text>,
               title: 'Dành choa gấu cái',
+              headerTitle: '👩 Dành choa gấu cái',
             }}
           />
           <Tab.Screen
@@ -69,7 +72,8 @@ const App = () => {
             component={BoyScreen}
             options={{
               tabBarIcon: () => <Text>👦</Text>,
-              title: 'Dành choa Gấu đực',
+              title: 'Dành choa gấu đực',
+              headerTitle: '👦 Dành choa gấu đực',
             }}
           />
         </Tab.Navigator>
@@ -78,4 +82,4 @@ const App = () => {
   );
 };
 
-export default CodePush({ checkFrequency: CodePush.CheckFrequency.MANUAL })(App);
+export default codePush({ checkFrequency: codePush.CheckFrequency.MANUAL })(App);

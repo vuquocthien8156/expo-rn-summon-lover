@@ -15,29 +15,7 @@ import {
 } from "./stylesComponent";
 import { pushNotification, getTokenById } from "./service";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const functions = [
-  {
-    title: "🍚 Em đói quá",
-    color: "#e74c3c",
-    bodyNotify: "🍰 Em đói quá, qua chở em đi mua đi huhu 😢",
-  },
-  {
-    title: "🥤 Thèm tà tưa",
-    color: "#2980b9",
-    bodyNotify: "Em thèm tà tưa quá, qua chở em đi mua đi huhu 😢",
-  },
-  {
-    title: "😔 Nhớ a quá",
-    color: "#2ecc71",
-    bodyNotify: "Em nhớ a quá, tối nay qua em nha 😢",
-  },
-  {
-    title: "📞 Gọi em nha",
-    color: "#f1c40f",
-    bodyNotify: "Gọi em, có việc gấp nhé",
-  },
-];
+import { functions } from "./const";
 
 export const GirlScreen = () => {
   const [loading, setLoading] = React.useState(true);

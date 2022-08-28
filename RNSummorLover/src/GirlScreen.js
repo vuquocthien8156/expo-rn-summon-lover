@@ -1,48 +1,11 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
-import {
-  ButtonConfirm,
-  Container,
-  Input,
-  LabelInput,
-  TextButtonConfirm,
-  WhiteSpace,
-  ButtonFunction,
-  TextButtonFunction,
-  ContainerFunction,
-  TitleFunction,
-  LoadingContainer,
-} from './stylesComponent';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { pushNotification, getTokenById } from './service';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const functions = [
-  {
-    title: '🍚 Em đói quá',
-    color: '#e74c3c',
-    bodyNotify: '🍰 Em đói quá, qua chở em đi mua đi huhu 😢',
-  },
-  {
-    title: '🥤 Thèm tà tưa',
-    color: '#2980b9',
-    bodyNotify: 'Em thèm tà tưa quá, qua chở em đi mua đi huhu 😢',
-  },
-  {
-    title: '😔 Nhớ a quá',
-    color: '#2ecc71',
-    bodyNotify: 'Em nhớ a quá, tối nay qua em nha 😢',
-  },
-  {
-    title: '📞 Gọi em nha',
-    color: '#f1c40f',
-    bodyNotify: 'Gọi em, có việc gấp nhé',
-  },
-  {
-    title: '📞 Em hết pin rồi',
-    color: 'pink',
-    bodyNotify: '🔋 Em hết pin rồi, anh sạc em đi 😢',
-  },
-];
+import { styles } from './styles';
+import { functions } from './const';
+import { LoadingView } from './components/Loading';
+import { ButtonConfirm } from './components/Button';
 
 export const GirlScreen = () => {
   const [loading, setLoading] = React.useState(true);
@@ -52,7 +15,7 @@ export const GirlScreen = () => {
   React.useEffect(() => {
     AsyncStorage.getItem('boy_friend', (e, data) => {
       if (e) {
-        alert(e);
+        Alert.alert(e.message);
         return;
       }
       const _data = JSON.parse(data);
@@ -81,52 +44,43 @@ export const GirlScreen = () => {
   };
 
   return (
-    <Container>
+    <View style={styles.container}>
       {token ? (
         <>
-          <TitleFunction>Mã của gấu là {id} 👦</TitleFunction>
-          <ButtonConfirm onPress={confirmNewBoy}>
-            <TextButtonConfirm>Có gấu mới</TextButtonConfirm>
-          </ButtonConfirm>
+          <Text style={styles.titleFunction}>Mã của gấu là {id} 👦</Text>
+          <ButtonConfirm onPress={confirmNewBoy} title="Có gấu mới" />
         </>
       ) : (
         <>
-          <LabelInput>Mã của gấu 👦</LabelInput>
-          <Input onChangeText={onChangeId} placeholder="Nhập mã của gấu đực vào đây" />
-
-          <WhiteSpace />
-          <ButtonConfirm onPress={confirmId}>
-            <TextButtonConfirm>Xác nhận</TextButtonConfirm>
-          </ButtonConfirm>
-          <WhiteSpace />
+          <Text style={styles.labelInput}>Mã của gấu 👦</Text>
+          <TextInput style={styles.input} onChangeText={onChangeId} placeholder="Nhập mã của gấu đực vào đây" />
+          <View style={styles.whiteSpace} />
+          <ButtonConfirm onPress={confirmId} />
+          <View style={styles.whiteSpace} />
         </>
       )}
 
       {!!token && (
         <>
-          <WhiteSpace />
-          <TitleFunction>Triệu hồi gấu đực</TitleFunction>
-          <ContainerFunction>
+          <Text style={styles.titleFunction} />
+          <Text style={styles.titleFunction}>Triệu hồi gấu đực</Text>
+          <View style={styles.containerFunction}>
             {functions.map((func, index) => (
-              <ButtonFunction
+              <TouchableOpacity
+                style={[styles.buttonFunction, { backgroundColor: func.color, marginBottom: 15 }]}
                 onPress={async () => {
                   setLoading(true);
                   await pushNotification(token, func.title, func.bodyNotify);
                   setLoading(false);
                 }}
-                key={index}
-                backgroundColor={func.color}>
-                <TextButtonFunction>{func.title}</TextButtonFunction>
-              </ButtonFunction>
+                key={index}>
+                <Text style={styles.textButtonFunction}>{func.title}</Text>
+              </TouchableOpacity>
             ))}
-          </ContainerFunction>
+          </View>
         </>
       )}
-      {loading && (
-        <LoadingContainer>
-          <ActivityIndicator size={'large'} color={'#fff'} />
-        </LoadingContainer>
-      )}
-    </Container>
+      <LoadingView visible={loading} />
+    </View>
   );
 };

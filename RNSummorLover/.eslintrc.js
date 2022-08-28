@@ -1,12 +1,17 @@
 module.exports = {
   root: true,
   extends: ['eslint:recommended'],
+  parser: 'babel-eslint',
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 6,
+  },
   overrides: [
     {
       files: ['*.js'],
       rules: {
         'react/jsx-filename-extension': 'off',
-        '@typescript-eslint/no-shadow': ['error'],
+        '@typescript-eslint/no-shadow': 0,
         'no-shadow': 'off',
         'no-undef': ['error', { typeof: true }],
         'one-var-declaration-per-line': [2, 'always'],
@@ -17,7 +22,7 @@ module.exports = {
         eqeqeq: 2,
         camelcase: 0,
         'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': ['error'],
+        '@typescript-eslint/no-unused-vars': 0,
         'no-underscore-dangle': 0,
         'arrow-body-style': 0,
         'prefer-destructuring': ['error', { object: true, array: false }],

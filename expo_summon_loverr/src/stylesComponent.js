@@ -63,6 +63,7 @@ export const ButtonFunction = styled(TouchableOpacity)((props) => ({
   justifyContent: "center",
   alignItems: "center",
   borderRadius: 5,
+  marginBottom: 16,
   backgroundColor: props?.backgroundColor || "red",
 }));
 

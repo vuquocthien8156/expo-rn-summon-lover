@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 const EXPO_SERVICE_URL = 'https://fcm.googleapis.com/fcm/send';
 const SERVER_TOKEN = 'https://json-server-demo.glitch.me/games/';
@@ -22,10 +23,9 @@ export const pushNotification = async (token, title, body) => {
       },
     });
 
-    console.log('res', res);
-    alert('Triệu hồi đã được gửi');
+    Alert.alert('', 'Triệu hồi đã được gửi');
   } catch (e) {
-    alert('Lỗi triệu hồi: ' + JSON.stringify(e));
+    Alert.alert('Lỗi triệu hồi: ', JSON.stringify(e));
   }
 };
 
@@ -34,7 +34,7 @@ export const pushToken = async (token) => {
     const result = await axios.post(SERVER_TOKEN, { token });
     return result.data;
   } catch (e) {
-    alert('Không thể lưu token: ' + JSON.stringify(e));
+    Alert.alert('Không thể lưu token: ', JSON.stringify(e));
   }
 };
 
@@ -44,6 +44,6 @@ export const getTokenById = async (id) => {
     console.log('getTokenById', result);
     return result.data;
   } catch (e) {
-    alert('Không thể lưu token: ' + JSON.stringify(e));
+    Alert.alert('Không thể lưu token: ', JSON.stringify(e));
   }
 };
