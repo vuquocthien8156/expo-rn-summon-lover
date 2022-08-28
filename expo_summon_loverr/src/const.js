@@ -26,7 +26,7 @@ export const functions = [
   },
   {
     title: '👨🏻‍🦲 Em muốn có 👨🏻‍🦲',
-    color: 'pink',
+    color: 'orange',
     bodyNotify: '👨🏻‍🦲 Em muốn anh làm bố con iem 👨🏻‍🦲',
   },
 ];

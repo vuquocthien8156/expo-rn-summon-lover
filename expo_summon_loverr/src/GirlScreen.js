@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, ScrollView } from "react-native";
 import {
   ButtonConfirm,
   Container,
@@ -82,21 +82,23 @@ export const GirlScreen = () => {
         <>
           <WhiteSpace />
           <TitleFunction>Triệu hồi gấu đực</TitleFunction>
-          <ContainerFunction>
-            {functions.map((func, index) => (
-              <ButtonFunction
-                onPress={async () => {
-                  setLoading(true);
-                  await pushNotification(token, func.title, func.bodyNotify);
-                  setLoading(false);
-                }}
-                key={index}
-                backgroundColor={func.color}
-              >
-                <TextButtonFunction>{func.title}</TextButtonFunction>
-              </ButtonFunction>
-            ))}
-          </ContainerFunction>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <ContainerFunction>
+              {functions.map((func, index) => (
+                <ButtonFunction
+                  onPress={async () => {
+                    setLoading(true);
+                    await pushNotification(token, func.title, func.bodyNotify);
+                    setLoading(false);
+                  }}
+                  key={index}
+                  backgroundColor={func.color}
+                >
+                  <TextButtonFunction>{func.title}</TextButtonFunction>
+                </ButtonFunction>
+              ))}
+            </ContainerFunction>
+          </ScrollView>
         </>
       )}
       {loading && (

@@ -5,6 +5,14 @@ export const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'pink',
   },
   containerCenter: {
     justifyContent: 'center',
@@ -35,14 +43,14 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    margin: 10,
+    marginTop: 20,
+    marginBottom: 20,
   },
   containerFunction: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     alignContent: 'space-between',
-    height: 210,
   },
   buttonFunction: {
     width: '48%',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, TouchableOpacity, View, Text } from 'react-native';
+import { Alert, TouchableOpacity, View, Text, Image } from 'react-native';
 
 import { pushToken } from './service';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -51,6 +51,7 @@ export const BoyScreen = () => {
 
   return (
     <View style={[styles.container, styles.containerCenter]}>
+      <Image style={styles.logo} source={require('../assets/icon.png')} />
       <Text style={styles.titleFunction}>
         {id ? `Mã của bạn là "${id}", đưa choa gấu thôi nào 😟😟😟` : 'Bạn chưa có mã số, bấm để lấy mã'}
       </Text>

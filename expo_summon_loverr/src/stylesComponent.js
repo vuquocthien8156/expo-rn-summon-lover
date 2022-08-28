@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import styled from "styled-components";
 
 export const WhiteSpace = styled(View)({
@@ -16,6 +16,14 @@ export const Container = styled(View)(({ center }) => ({
       }
     : {}),
 }));
+
+export const Logo = styled(Image)({
+  width: 80,
+  height: 80,
+  borderRadius: 20,
+  borderWidth: 1,
+  borderColor: "pink",
+});
 
 export const LabelInput = styled(Text)({
   fontSize: 14,
@@ -53,7 +61,6 @@ export const ContainerFunction = styled(View)({
   flexWrap: "wrap",
   justifyContent: "space-between",
   alignContent: "space-between",
-  height: 210,
 });
 
 export const ButtonFunction = styled(TouchableOpacity)((props) => ({

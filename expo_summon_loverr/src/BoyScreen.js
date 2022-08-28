@@ -8,6 +8,7 @@ import {
   TitleFunction,
   TextButtonConfirm,
   LoadingContainer,
+  Logo,
 } from "./stylesComponent";
 
 import { pushToken } from "./service";
@@ -69,6 +70,7 @@ export const BoyScreen = () => {
 
   return (
     <Container center={true}>
+      <Logo source={require("../assets/icon.png")} />
       <TitleFunction>
         {id ? `Mã của bạn là "${id}"` : "Bạn chưa có mã số, bấm để lấy mã"}
       </TitleFunction>

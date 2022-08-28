@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { pushNotification, getTokenById } from './service';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './styles';
@@ -62,22 +62,23 @@ export const GirlScreen = () => {
 
       {!!token && (
         <>
-          <Text style={styles.titleFunction} />
           <Text style={styles.titleFunction}>Triệu hồi gấu đực</Text>
-          <View style={styles.containerFunction}>
-            {functions.map((func, index) => (
-              <TouchableOpacity
-                style={[styles.buttonFunction, { backgroundColor: func.color, marginBottom: 15 }]}
-                onPress={async () => {
-                  setLoading(true);
-                  await pushNotification(token, func.title, func.bodyNotify);
-                  setLoading(false);
-                }}
-                key={index}>
-                <Text style={styles.textButtonFunction}>{func.title}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={styles.containerFunction}>
+              {functions.map((func, index) => (
+                <TouchableOpacity
+                  style={[styles.buttonFunction, { backgroundColor: func.color, marginBottom: 15 }]}
+                  onPress={async () => {
+                    setLoading(true);
+                    await pushNotification(token, func.title, func.bodyNotify);
+                    setLoading(false);
+                  }}
+                  key={index}>
+                  <Text style={styles.textButtonFunction}>{func.title}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
         </>
       )}
       <LoadingView visible={loading} />
