@@ -55,7 +55,7 @@ export default function App() {
             component={BoyScreen}
             options={{
               tabBarIcon: () => <Text>👦</Text>,
-              title: "Dành choa Gấu đực",
+              title: "Dành choa gấu đực",
             }}
           />
         </Tab.Navigator>
